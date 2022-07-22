@@ -1,6 +1,6 @@
 resource "aws_instance" "ansible_server" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
+  instance_type = "t3.medium"
 
   vpc_security_group_ids = [aws_security_group.ansible_server.id]
   key_name = "talent-academy-lab"

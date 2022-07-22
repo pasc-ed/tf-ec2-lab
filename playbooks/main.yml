@@ -1,0 +1,22 @@
+---
+- hosts: web
+  become: true
+  tasks:
+    - name: Update the apt-get
+      apt:
+        update_cache: yes
+
+    - name: Install apache2
+      apt:
+        name: "apache2"
+        state: present
+
+    - name: Copy my index page
+      copy:
+        src: "index.html"
+        dest: "/var/www/html/index.html"
+
+    - name: Restart apache2 server
+      service:
+        name: apache2
+        state: restarted
