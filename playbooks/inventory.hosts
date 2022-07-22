@@ -1,5 +1,21 @@
-[web]
-54.77.253.122
+[web_red]
+54.74.50.16
+
+[web_blue]
+54.228.113.76
+52.31.120.114
+
+[web_yellow]
+52.208.96.36
+
+[web_green]
+108.128.68.144
+
+[web:children]
+web_red
+web_blue
+web_yellow
+web_green
 
 [web:vars]
 ansible_user=ubuntu

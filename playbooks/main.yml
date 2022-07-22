@@ -11,10 +11,28 @@
         name: "apache2"
         state: present
 
-    - name: Copy my index page
+    - name: Create a directory if it does not exist
+      file:
+        path: "{{ website_path }}"
+        state: directory
+
+    - name: Copy new temple file index.html.j2 file
+      template:
+        src: "index.html.j2"
+        dest: "{{ website_path }}/index.html"
+
+    - name: Copy configuration file for apache
       copy:
-        src: "index.html"
-        dest: "/var/www/html/index.html"
+        src: "pascal.conf"
+        dest: "/etc/apache2/sites-available/pascal.conf"
+
+    - name: Enable site for pascal.conf
+      command:
+        a2ensite pascal.conf
+
+    - name: Disable site for default.conf
+      command:
+        a2dissite 000-default.conf
 
     - name: Restart apache2 server
       service:
